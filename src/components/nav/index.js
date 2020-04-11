@@ -2,16 +2,16 @@ import React from "react"
 import { Link } from "gatsby"
 import { window } from "browser-monads"
 
-import logo from "../../images/console.logo.svg"
+import logo from "../../images/logo.svg"
 import "./nav.css"
 
 const Nav = () => {
   return (
     <nav>
       <div className="nav__items">
-        <a className="nav__item--left">
+        <Link to="/" className="nav__item--left">
           <img src={logo} alt="Travel Blog" className="nav__item--logo" />
-        </a>
+        </Link>
         <Link
           to="/contact"
           className={
