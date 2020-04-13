@@ -1,0 +1,12 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.footer a {
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
