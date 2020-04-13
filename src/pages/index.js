@@ -4,12 +4,14 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Nav from "../components/nav"
 import Featured from "../components/featured"
+import Home from "../components/home"
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
     <Nav />
     <Featured />
+    <Home />
   </Layout>
 )
 
