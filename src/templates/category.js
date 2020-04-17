@@ -42,11 +42,11 @@ export const categoryQuery = graphql`
 
 const archiveTemplate = ({ data, pageContext }) => {
   const blogContent = data.allContentfulBlog
-  const { currentPage, numPages } = pageContext
-  const isFirst = currentPage === 1
-  const isLast = currentPage === numPages
-  const prevPage = currentPage - 1 === 1 ? "/blog" : `/blog/${currentPage - 1}`
-  const nextPage = `/blog/${currentPage + 1}`
+  // const { currentPage, numPages } = pageContext
+  // const isFirst = currentPage === 1
+  // const isLast = currentPage === numPages
+  // const prevPage = currentPage - 1 === 1 ? "/blog" : `/blog/${currentPage - 1}`
+  // const nextPage = `/blog/${currentPage + 1}`
 
   return (
     <Layout>
