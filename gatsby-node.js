@@ -83,4 +83,75 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       },
     })
   })
+
+  // Query for creating each category page
+  const categoryResult = await graphql(
+    `
+      {
+        allContentfulCategory(
+          filter: { node_locale: { eq: "en-US" } }
+          sort: { fields: createdAt, order: DESC }
+        ) {
+          edges {
+            node {
+              id
+              slug
+            }
+          }
+        }
+      }
+    `
+  )
+
+  // Handle errors
+  if (categoryResult.errors) {
+    reporter.panicOnBuild(`Error While running GraphQL query.`)
+    return
+  }
+
+  // Configure pagination
+  const catBlogs = categoryResult.data.allContentfulCategory.edges
+  const catBlogsPerPage = 9
+  const catNumPages = Math.ceil(catBlogs.length / catBlogsPerPage)
+
+  categoryResult.data.allContentfulCategory.edges.forEach(({ node }) => {
+    createPage({
+      path: `category/${node.slug}`,
+      component: path.resolve(`src/templates/category.js`), // Create Pages for each markdown file
+      // In your blog post template's graphql query, you can use pagePath
+      // as a GraphQL variable to query for data from the markdown file.
+      context: {
+        id: node.id,
+      },
+    })
+  })
+
+  // Create an array for blog posts passed per page
+  // Array.from({ length: catNumPages }).forEach((_, i) => {
+  //   createPage({
+  //     path:
+  //       i === 0
+  //         ? `/category/${cat.node.slug}`
+  //         : `/category/${cat.node.slug}/${i + 1}`,
+  //     component: path.resolve(`src/templates/category.js`),
+  //     context: {
+  //       limit: catBlogsPerPage,
+  //       skip: i * catBlogsPerPage,
+  //       catNumPages,
+  //       currentPage: i + 1,
+  //     },
+  //   })
+  // })
+
+  // categoryResult.data.allContentfulCategory.edges.forEach(({ node }) => {
+  //   createPage({
+  //     path: `category/${node.slug}`,
+  //     component: path.resolve(`src/templates/category.js`), // Create Pages for each markdown file
+  //     // In your blog post template's graphql query, you can use pagePath
+  //     // as a GraphQL variable to query for data from the markdown file.
+  //     context: {
+  //       id: node.id,
+  //     },
+  //   })
+  // })
 }
