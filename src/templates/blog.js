@@ -23,13 +23,13 @@ const blogTemplate = ({ data }) => {
           style={{
             backgroundImage: `url(${data.contentfulBlog.featuredImage.fluid.src})`,
           }}
-        >
-          <div className="blog__info">
-            <div className="blog__title">{data.contentfulBlog.title}</div>
-          </div>
+        ></div>
+        <div className="blog__info">
+          <div className="blog__title">{data.contentfulBlog.title}</div>
         </div>
         <div className="blog__wrapper">
           <div
+            class="blog__content"
             dangerouslySetInnerHTML={{
               __html: `${data.contentfulBlog.content.childMarkdownRemark.html}`,
             }}
