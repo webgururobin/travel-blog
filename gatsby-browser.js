@@ -6,4 +6,4 @@
 
 // You can delete this file if you're not using it
 
-import "gatsby-prismjs-dracula"
+import "./src/pages/prism.css"
